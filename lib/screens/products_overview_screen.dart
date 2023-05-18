@@ -13,7 +13,6 @@ class ProductsOverviewScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Minha loja'),
-        backgroundColor: Colors.blue,
       ),
       body: GridView.builder(
         padding: const EdgeInsets.all(10),
