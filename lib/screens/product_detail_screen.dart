@@ -9,10 +9,35 @@ class ProductDetailScreen extends StatelessWidget {
     final Product product =
         ModalRoute.of(context)!.settings.arguments as Product;
     return Scaffold(
-      appBar: AppBar(
-          title: Text(
-        product.name,
-      )),
-    );
+        appBar: AppBar(title: Text(product.name)),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              // ignore: sized_box_for_whitespace
+              Container(
+                height: 300,
+                width: double.infinity,
+                child: Image.network(
+                  product.imageUrl,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              const SizedBox(height: 10),
+              Text(
+                'R\$ ${product.price}',
+                style: const TextStyle(color: Colors.grey, fontSize: 20),
+              ),
+              const SizedBox(height: 10),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                width: double.infinity,
+                child: Text(
+                  product.description,
+                  textAlign: TextAlign.center,
+                ),
+              )
+            ],
+          ),
+        ));
   }
 }
