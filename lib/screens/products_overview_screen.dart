@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shop/components/badge_cart.dart';
+import 'package:shop/utils/app_route.dart';
 
 import '../components/product_grid.dart';
+import '../models/cart.dart';
 
 // ignore: constant_identifier_names
 enum FilterOptions { Favorite, All }
@@ -22,6 +26,19 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
       appBar: AppBar(
         title: const Text('Minha loja'),
         actions: [
+          Consumer<Cart>(
+            child: IconButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed(AppRoutes.CART);
+              },
+              icon: const Icon(Icons.shopping_cart),
+            ),
+            builder: (ctx, cart, child) => BadgeCart(
+              value: cart.itemsCount.toString(),
+              color: Theme.of(context).colorScheme.secondary,
+              child: child!,
+            ),
+          ),
           PopupMenuButton(
             icon: const Icon(Icons.more_vert),
             itemBuilder: (_) => [
