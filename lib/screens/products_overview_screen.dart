@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:shop/models/product_list.dart';
 
 import '../components/product_grid.dart';
 
+// ignore: constant_identifier_names
 enum FilterOptions { Favorite, All }
 
 class ProductsOverviewScreen extends StatefulWidget {
