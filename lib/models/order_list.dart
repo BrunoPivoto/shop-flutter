@@ -6,6 +6,7 @@ import 'package:shop/models/cart.dart';
 import 'order.dart';
 
 class OrderList with ChangeNotifier {
+  // ignore: prefer_final_fields
   List<Order> _items = [];
 
   List<Order> get items {
