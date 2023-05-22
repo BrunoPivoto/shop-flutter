@@ -6,12 +6,19 @@ import '../components/product_grid.dart';
 
 enum FilterOptions { Favorite, All }
 
-class ProductsOverviewScreen extends StatelessWidget {
+class ProductsOverviewScreen extends StatefulWidget {
   const ProductsOverviewScreen({super.key});
 
   @override
+  State<ProductsOverviewScreen> createState() => _ProductsOverviewScreenState();
+}
+
+class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
+  bool _showFavoriteOnly = false;
+
+  @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<ProductList>(context);
+    //final provider = Provider.of<ProductList>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Minha loja'),
@@ -29,16 +36,20 @@ class ProductsOverviewScreen extends StatelessWidget {
               ),
             ],
             onSelected: (FilterOptions selectedValue) {
-              if (selectedValue == FilterOptions.Favorite) {
-                provider.showFavoriteOnly();
-              } else {
-                provider.showAll();
-              }
+              setState(() {
+                if (selectedValue == FilterOptions.Favorite) {
+                  //provider.showFavoriteOnly();
+                  _showFavoriteOnly = true;
+                } else {
+                  //provider.showAll();
+                  _showFavoriteOnly = false;
+                }
+              });
             },
           )
         ],
       ),
-      body: const ProductGrid(),
+      body: ProductGrid(showFavoriteOnly: _showFavoriteOnly),
     );
   }
 }
