@@ -43,8 +43,12 @@ class CartScreen extends StatelessWidget {
                   const Spacer(),
                   TextButton(
                     onPressed: () {
-                      Provider.of<OrderList>(context, listen: false)
-                          .addOrder(cart);
+                      if (cart.itemsCount >= 1) {
+                        Provider.of<OrderList>(
+                          context,
+                          listen: false,
+                        ).addOrder(cart);
+                      }
                       cart.clear();
                     },
                     child: Text('Comprar',
@@ -55,11 +59,21 @@ class CartScreen extends StatelessWidget {
               ),
             ),
           ),
-          Expanded(
-              child: ListView.builder(
-            itemCount: items.length,
-            itemBuilder: (ctx, i) => CartItemWidget(cartItem: items[i]),
-          ))
+          cart.itemsCount > 0
+              ? Expanded(
+                  child: ListView.builder(
+                  itemCount: items.length,
+                  itemBuilder: (ctx, i) => CartItemWidget(cartItem: items[i]),
+                ))
+              : const Center(
+                  child: Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text(
+                      'Carrinho vazio',
+                      style: TextStyle(fontSize: 30),
+                    ),
+                  ),
+                ),
         ],
       ),
     );
