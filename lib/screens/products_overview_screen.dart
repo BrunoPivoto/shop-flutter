@@ -83,7 +83,12 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
       ),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
-          : ProductGrid(showFavoriteOnly: _showFavoriteOnly),
+          : RefreshIndicator(
+              onRefresh: () => Provider.of<ProductList>(
+                    context,
+                    listen: false,
+                  ).loadProducts(),
+              child: ProductGrid(showFavoriteOnly: _showFavoriteOnly)),
       drawer: const AppDrawer(),
     );
   }
